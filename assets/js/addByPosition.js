@@ -1,13 +1,86 @@
 function searchLineups(pos, num, captain){
 
-	if(captain === 'yes') addCaptain(pos, num)
-	else addRegular(pos, num)
+	addPlayer(pos, num)
 
 }
 
 function searchLineupsToRemove(pos, num, captain){
 	if(captain === 'yes') removeCaptain(pos, num)
 	else removeRegular(pos, num)
+}
+
+function addPlayer(pos, numLineups){
+
+	var addedTo = [] // Lineup Id's that fit our criteria. We'll use this at the end of this function
+
+	// Looping through global lineups
+	for(var i=0; i < lineups.length; i++){
+
+		let alreadyInLineup = isClickedPlayerInLineup(lineups[i].id)
+		if(alreadyInLineup) continue
+
+		switch(pos){
+			case 'QB': 
+				checkQB(lineups[i])
+				break
+			case 'RB':
+				checkRB(lineups[i])
+				break
+			case 'WR':
+				checkWR(lineups[i])
+				break
+			default:
+				console.log("ERROR")
+				break
+		}
+
+		// Stop because we've reached the number to add
+		if(addedTo.length == numLineups) break
+
+	}
+
+}
+
+function checkQB(lineup){
+	if(!lineup.roster['QB'][0].ID){
+		lineup.roster['QB'][0] = clickedPlayer
+	} else if(!lineup.roster['SF'][0].ID){
+		lineup.roster['SF'][0] = clickedPlayer
+	}
+}
+
+function checkRB(lineup){
+	for (var i=0; i < 2; i++){
+		if(!lineup.roster['RB'][i].ID){
+			lineup.roster['RB'][i] = clickedPlayer
+			return 
+		}
+	}
+	if(!lineup.roster['FX'][0].ID){
+		lineup.roster['FX'][0] = clickedPlayer
+		return
+	}
+	if(!lineup.roster['SF'][0].ID){
+		lineup.roster['SF'][0] = clickedPlayer
+		return
+	}
+}
+
+function checkWR(lineup){
+	for (var i=0; i < 3; i++){
+		if(!lineup.roster['WR'][i].ID){
+			lineup.roster['WR'][i] = clickedPlayer
+			return 
+		}
+	}
+	if(!lineup.roster['FX'][0].ID){
+		lineup.roster['FX'][0] = clickedPlayer
+		return
+	}
+	if(!lineup.roster['SF'][0].ID){
+		lineup.roster['SF'][0] = clickedPlayer
+		return
+	}
 }
 
 
@@ -182,6 +255,9 @@ function addLineupsToPlayer(pid, toAdd){
 	}
 }
 
+function isClickedPlayerInLineup(lid){
+	return _.includes(clickedPlayerLineups, lid)
+}
 
 function checkPlayerLineups(pid){
 	let player = _.find(selectedPlayers, {'ID': pid })

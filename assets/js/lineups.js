@@ -33,6 +33,8 @@ function printLineups(arr){
 			output +='<tr><th colspan="4"> Lineup #' + count + '</th></tr>'
 			
 			var slotCount = 0
+			var salary = 0
+
 			for(var key in lineup.roster){
 				
 				let position = lineup.roster[key]
@@ -43,6 +45,7 @@ function printLineups(arr){
 					else output += '<tr data-row="' + slotCount + '">'
 						output += '<td>' + key + '</td>'
 						if(slot.Name){
+							salary += slot.Salary
 							output += '<td>' + slot.Name + '</td>'
 							output += '<td>' + slot.Salary
 							output += '<td>' + '-' + '</td>'  
@@ -54,6 +57,7 @@ function printLineups(arr){
 				})
 			}
 
+		output += '<tr><td colspan="2">Rem: ' + (50000 - salary) + '</td><td colspan="2">' + salary + '</td></tr>'
 		output += '</table>'
 
 		count ++
