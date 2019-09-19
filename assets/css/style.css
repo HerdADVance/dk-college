@@ -1,0 +1,288 @@
+/* http://meyerweb.com/eric/tools/css/reset/ v2.0 | 20110126 License: none (public domain) */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, input, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+  -webkit-margin-start: 0;
+  -webkit-margin-end: 0;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block; 
+}
+body {
+  line-height: 1; 
+}
+ol, ul {
+  list-style: none; 
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0; 
+  width: 100%;
+}
+*{
+  box-sizing: border-box;
+}
+body{
+  background: #666;
+  font-family: 'Montserrat', sans-serif;
+}
+td{
+  border: 1px solid #CCC;
+  padding: 8px;
+  text-align: center;
+  vertical-align: middle;
+}
+button{
+  cursor: pointer;
+}
+.clickable tr:hover, .clickable li:hover{
+  cursor: pointer;
+}
+.pos{
+  background: lightgreen !important;
+}
+.neg{
+  background: lightcoral !important;
+}
+
+/* MAIN WRAPPER */
+.wrapper{
+  margin: 20px;
+}
+
+
+/* TOP LEVEL DIVS */
+.list{
+  float: left;
+  width: 33%;
+}
+.lineups{
+  background:;
+  color: #FFF;
+  float: right;
+  width: 66%;
+}
+
+
+/* PLAYERS TABLE HEADERS AND WRAP */
+.sort-players{
+  display: block;
+  width: 100%;
+}
+.sort-positions li{
+  background: #FF6C00;
+  border: 1px solid #FFF;
+  border-bottom: none;
+  color: #FFF;
+  display: inline-block;
+  float: left;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  user-select: none;
+  width: 16.6666%;
+}
+.sort-positions li.selected{
+  background: #9AE200;
+}
+.sort-games li{
+  background: #333;
+  border: 1px solid #CCC;
+  color: white;
+  float: left;
+  font-size: 16px;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  user-select: none;
+  width: 33.3333%;
+}
+.sort-games li:last-child{
+  border-right: 2px solid #CCC;
+}
+.sort-games li.selected{
+  background: steelblue;
+}
+
+.players-wrap{
+  clear: both;
+  display: block;
+  max-height: calc(100% - 130px);
+  overflow-y: scroll;
+}
+
+/* PLAYERS TABLE ROWS AND CELLS */
+.players > tr{
+  background: #FFF;
+}
+.players > tr:nth-child(odd){
+  background: #EEE;
+}
+.players > tr:hover{
+  background: #999;
+}
+.players td{
+  font-size: 14px;
+}
+td.name{
+  font-weight: 600;
+  text-align: left;
+}
+td.ppg{
+  font-size: 12px;
+}
+td.gameinfo{
+  font-size: 11px;
+}
+
+/* PLAYER ADD EXPANDED AREA ON CLICK */
+.player-add{
+  background: #666 !important;
+  color: #FFF;
+  display: none;
+  min-height: 100px;
+}
+.player-add-currently-in{
+  font-size: 12px;
+  font-weight: bold;
+}
+.player-add-slider{
+  margin: 10px 5%;
+  width: 90%;
+}
+.player-add-con{
+  display: none;
+}
+.players .player-add-con{
+  display: block;
+}
+.player-add-slider span{
+  border: 0 !important;
+}
+.player-add-slider-number{
+  background: none;
+  border: none;
+  color: #FF6C00;
+  font-size: 20px;
+  line-height: 24px;
+  text-align: center;
+  width: 40px;
+}
+.player-add-slider-pct{
+  font-size: 16px;
+  line-height: 24px;
+}
+.player-add-button{
+  background: lightgreen;
+  color: 000;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 10px 0;
+  padding: 5px;
+}
+#delta-minus{
+  background: lightcoral;
+}
+
+/* OPTIONS IN PLAYER ADD SECTION */
+.player-add-options button{
+  background: #333;
+  color: white;
+  float: left;
+  margin: 0 1.25%;
+  width: 22.5%;
+}
+
+.correlation{
+  margin-left: 1.25%;
+  width: 97.5%;
+}
+
+.player-select-add-highlighted{
+  margin: 10px 0;
+}
+
+.player-select-dupes{
+  font-size: 10px;
+}
+
+/* LINEUP TABLES */
+.lineups-wrap{
+  clear: both;
+  display: block;
+  max-height: calc(100% - 40px);
+  overflow-y: scroll;
+}
+.lineup{
+  float: left;
+  margin: 0 0.33% 20px 0.33%;
+  width: 24%;
+}
+.lineup th{
+  background: #333;
+  color: #FFF;
+  font-size: 12px;
+  padding: 5px 0;
+}
+.lineup tr{
+  background: #FFF;
+  cursor: pointer;
+}
+.lineup tr:hover{
+  background: #EEE;
+}
+.lineup tr.player-selectable{
+  background: skyblue;
+}
+.lineup tr.has-player:hover{
+  background: pink;
+}
+
+.lineup td{
+  color: #000;
+  font-size: 10px;
+  height: 23px;
+  padding: 0;
+}
+
+/* INDIVIDUAL LINEUP PLAYER ROWS */
+.lineup tr td:first-child{
+  width: 30px;
+}
+.lineup tr td:nth-child(3){
+  font-size: 12px;
+  width: 50px;
+}
+.lineup tr td:last-child{
+  cursor: pointer;
+  width: 25px;
+}
+
+/* LINEUP TOTALS ROW */
+td.lineup-total-salary{
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* LATEST UPDATE */
+.latest-update{
+  background: rgba(79,130,87,0.9);
+  bottom: 0;
+  color: #FFF;
+  display: none;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 15px 0;
+  position: fixed;
+  right: 0;
+  text-align: center;
+  width: 100%;
+}

@@ -1,0 +1,69 @@
+<!DOCTYPE>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>DK Lineup Builder</title>
+	<!--link rel="icon" type="image/png" href=".png"-->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:100,300,400,600,700" rel="stylesheet">
+	<link rel="stylesheet" href="assets/css/style.css">
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/black-tie/jquery-ui.css">
+</head>
+
+<body>
+	<div class="wrapper">
+
+		<div class="list">
+			
+			<div>
+				<ul class="sort-players sort-positions clickable">
+					<li>QB</li>
+					<li>RB</li>
+					<li>WR</li>
+					<li>FLEX</li>
+					<li>SEL</li>
+					<li class="selected">ALL</li>
+				</ul>
+			</div>
+
+			<div>
+				<ul class="sort-players sort-games clickable">
+					<li class="away-team"></li>
+					<li class="home-team"></li>
+					<li class="selected">ALL</li>
+				</ul>
+			</div>
+
+			<div class="players-wrap">
+				<table class="players clickable"></table>
+			</div>
+
+		</div>
+
+		
+		<div class="lineups">
+			<!--label for="lineups-number">Number of Lineups:</label>
+			<input type="number" class="lineups-number" name="lineups-number" min="0" step="1" /-->
+			
+			<div class="lineups-wrap"></div>
+		</div>
+
+	</div>
+
+	<div class="latest-update"></div>
+
+	
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="crossorigin="anonymous"></script> 
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="crossorigin="anonymous"></script>
+
+	<script src="/assets/js/lodash.js"></script>
+	<script src="/data/players-data.js"></script>
+	<script src="/assets/js/events.js"></script>
+	<script src="/assets/js/sortPlayers.js"></script>
+	<script src="/assets/js/selectPlayers.js"></script>
+	<script src="/assets/js/lineups.js"></script>
+	<script src="/assets/js/addByPosition.js"></script>
+	<script src="/assets/js/teams.js"></script>
+	<script src="/assets/js/app.js"></script>
+	<script src="/assets/js/slider.js"></script>
+</body>
+</html>
