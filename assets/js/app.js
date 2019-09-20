@@ -12,7 +12,7 @@ numberOfLineups = 15
 lineups = []
 
 clickedPlayer = null
-clickedPlayerLineups = [1,2,3]
+clickedPlayerLineups = []
 
 clickedLineupRows = []
 

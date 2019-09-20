@@ -14,10 +14,10 @@ function createLineup(){
 		id: newLineupId,
 	 	roster: {
 	 		QB: [{}],
+	 		SF: [{}],
 			RB: [{}, {}],
 			WR: [{}, {}, {}],
-			FX: [{}],
-			SF: [{}]
+			FX: [{}]
 	 	}
 	}
 }
