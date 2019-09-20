@@ -32,17 +32,17 @@ function printLineups(arr){
 		output += '<table class="lineup" id="' + lineup.id + '">'
 			output +='<tr><th colspan="4"> Lineup #' + count + '</th></tr>'
 			
-			var slotCount = 0
 			var salary = 0
 
 			for(var key in lineup.roster){
 				
 				let position = lineup.roster[key]
+				let slotCount = 0
 
 				_.forEach(position, function(slot){
 				
-					if(slot.Name) output += '<tr data-row="' + slotCount + '" data-pid="' + slot.ID + '" class="has-player">'
-					else output += '<tr data-row="' + slotCount + '">'
+					if(slot.Name) output += '<tr data-pos="' + key + '" data-slot="' + slotCount + '" data-pid="' + slot.ID + '" class="has-player">'
+					else output += '<tr data-pos="' + key + '" data-slot="' + slotCount + '">'
 						output += '<td>' + key + '</td>'
 						if(slot.Name){
 							salary += slot.Salary
@@ -67,14 +67,13 @@ function printLineups(arr){
 }
 
 
-function removePlayerFromOneLineup(playerId, lineupId, row){
+function removePlayerFromOneLineup(playerId, lineupId, position, slot){
 
 	// Find the lineup to remove player from
 	let foundLineup = lineups.findIndex(x => x.id == lineupId)
 
 	// Remove from captain or regular based on row
-	if(row == 0) lineups[foundLineup].roster['CAP'][0] = {}
-	else lineups[foundLineup].roster['REG'][row - 1] = {}
+	lineups[foundLineup].roster[position][slot] = {}
 
 	// Print the new lineups to reflect removal
 	printLineups(lineups)

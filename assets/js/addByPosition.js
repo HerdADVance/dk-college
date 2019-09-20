@@ -1,12 +1,11 @@
-function searchLineups(pos, num, captain){
+function searchLineups(pos, num){
 
 	addPlayer(pos, num)
 
 }
 
-function searchLineupsToRemove(pos, num, captain){
-	if(captain === 'yes') removeCaptain(pos, num)
-	else removeRegular(pos, num)
+function searchLineupsToRemove(pos, num){
+	removeRegular(pos, num)
 }
 
 function addPlayer(pos, numLineups){
@@ -110,13 +109,15 @@ function addPlayerToHighlightedLineups(){
 	let toAdd = [] // collecting lineup id's for selected players
 	
 	for(var i = 0; i < rows.length; i++){
+
+		let position = rows[i].position
+		let slot = rows[i].slot
 		
 		// find the index of each highlighted lineup
 		let foundLineupIndex = lineups.findIndex(x => x.id == rows[i].lineup)
 		
 		// insert as captain or regular
-		if(rows[i].row == 0) lineups[foundLineupIndex].roster['CAP'][0] = clickedPlayer
-		else lineups[foundLineupIndex].roster['REG'][rows[i].row - 1] = clickedPlayer
+		lineups[foundLineupIndex].roster[position][slot] = clickedPlayer
 
 		// Add to our collection to send to selected players
 		toAdd.push(lineups[foundLineupIndex].id)

@@ -48,15 +48,14 @@ $(".players").delegate(".player", "click", function(){
 $(".players").delegate(".player-select-add", "click", function(){
 
 	let random = $('#random').val()
-	let captain = $('#captain').val()
 	let numberToChange = parseInt(($('.player-select-delta').text()))
 
 	// Shuffle the lineups if random is selected
 	if(random == 'yes') lineups = _.shuffle(lineups);
 
 	// The main functions reponsible for adding or removing players
-	if(numberToChange < 0) searchLineupsToRemove(clickedPlayer.Position, numberToChange, captain)
-	else searchLineups(clickedPlayer.Position, numberToChange, captain)
+	if(numberToChange < 0) searchLineupsToRemove(clickedPlayer.Position, numberToChange)
+	else searchLineups(clickedPlayer.Position, numberToChange)
 
 	// Reorder the lineups by their original ID's before printing
 	lineups = _.orderBy(lineups, ['id'],['asc'])
@@ -91,12 +90,14 @@ $(".lineups").delegate("tr", "click", function(){
 	
 	var lineupId = parseInt($(this).parent().parent().attr('id'))
 	var playerId = $(this).attr('data-pid')
-	var row = $(this).attr('data-row')
+	
+	var position = $(this).attr('data-pos')
+	var slot = $(this).attr('data-slot')
 
 
 	if(playerId){ // This row has a player so remove him from lineup and update his selected lineups
 		
-		removePlayerFromOneLineup(playerId, lineupId, row)
+		removePlayerFromOneLineup(playerId, lineupId, position, slot)
 		// prevent this from taking away highlighted rows
 
 	} else{ // Highlight row background and add next clicked player to row
@@ -121,7 +122,8 @@ $(".lineups").delegate("tr", "click", function(){
 			// Add row to global
 			clickedLineupRows.push({
 				lineup: lineupId,
-				row: row
+				position: position,
+				slot: slot
 			})
 
 			$(this).siblings().removeClass('player-selectable')
