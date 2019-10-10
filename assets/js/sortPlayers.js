@@ -82,7 +82,6 @@ function sortPlayersByPosition(players, pos){
 			break
 	}
 
-	console.log(matching)
 	return matching
 }
 

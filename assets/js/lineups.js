@@ -14,10 +14,10 @@ function createLineup(){
 		id: newLineupId,
 	 	roster: {
 	 		QB: [{}],
-	 		SF: [{}],
 			RB: [{}, {}],
 			WR: [{}, {}, {}],
-			FX: [{}]
+			FX: [{}],
+			SF: [{}]
 	 	}
 	}
 }
@@ -64,19 +64,87 @@ function printLineups(arr){
 	})
 
 	$('.lineups').html(output)
+
+	localStorage.setItem("lineups", lineups)
 }
 
+function printOneLineup(lineup){
+
+	let hasSelectedRow = false
+
+	$('table#' + lineup.id + ' tr').each(function(index, value){
+		if($(value).hasClass('player-selectable')){
+			hasSelectedRow = true
+			selectedPosition = $(value).attr('data-pos')
+			selectedSlot = $(value).attr('data-slot')
+		}
+	})
+
+	let output = '<table class="lineup" id="' + lineup.id + '">'
+		output +='<tr><th colspan="4"> Lineup #' + lineup.id + '</th></tr>'
+		
+		var salary = 0
+
+		for(var key in lineup.roster){
+			
+			let position = lineup.roster[key]
+			let slotCount = 0
+
+			_.forEach(position, function(slot){
+			
+				let classes = ''
+
+				let hasPlayer = false
+				if(slot.Name){
+					hasPlayer = true
+					classes += 'has-player '
+				}
+
+				if(hasSelectedRow){
+					if(key == selectedPosition && slotCount == selectedSlot){
+						classes += 'player-selectable'
+					}
+				}
+
+				output += '<tr data-pos="' + key + '" data-slot="' + slotCount + '" data-pid="' + slot.ID + '" class="has-player">'
+				
+				output += '<tr data-pos="' + key + '" data-slot="' + slotCount + '"'
+					if(hasPlayer) output += ' data-pid="' + slot.ID + '"'
+					output += ' class="' + classes + '"'
+				output += '>'
+					output += '<td>' + key + '</td>'
+					if(slot.Name){
+						salary += slot.Salary
+						output += '<td>' + slot.Name + '</td>'
+						output += '<td>' + slot.Salary
+						output += '<td>' + '-' + '</td>'  
+					} else output += '<td></td><td></td><td>+</td>'
+				output += '</tr>'
+
+				slotCount ++
+
+			})
+		}
+
+	output += '<tr><td colspan="2">Rem: ' + (50000 - salary) + '</td><td colspan="2">' + salary + '</td></tr>'
+	output += '</table>'
+
+	$('table#' + lineup.id).html(output)
+
+	localStorage.setItem("lineups", lineups)
+
+}
 
 function removePlayerFromOneLineup(playerId, lineupId, position, slot){
 
 	// Find the lineup to remove player from
 	let foundLineup = lineups.findIndex(x => x.id == lineupId)
 
-	// Remove from captain or regular based on row
+	// Remove based on row
 	lineups[foundLineup].roster[position][slot] = {}
 
 	// Print the new lineups to reflect removal
-	printLineups(lineups)
+	printOneLineup(lineups[foundLineup])
 
 	// Remove from player's selected lineups or remove player from selected lineups array if was only in one
 	let foundPlayer = selectedPlayers.findIndex(x => x.ID == playerId)
@@ -104,6 +172,5 @@ function removePlayerFromOneLineup(playerId, lineupId, position, slot){
 	}
 
 	
-
 }
 

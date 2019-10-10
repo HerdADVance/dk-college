@@ -42,11 +42,15 @@ function addPlayer(pos, numLineups){
 
 	}
 
+	console.log(addedTo)
+
 	addLineupsToPlayer(addedTo)
 
 }
 
 function addLineupsToPlayer(toAdd){
+
+	console.log("TO ADD " + toAdd)
 	let lineupsIn = clickedPlayerLineups
 	
 	if(lineupsIn.length == 0){
@@ -125,7 +129,7 @@ function addPlayerToHighlightedLineups(){
 	}
 
 	// Update the player's lineups in selected players
-	addLineupsToPlayer(clickedPlayer.ID, toAdd)
+	addLineupsToPlayer(toAdd)
 
 }
 

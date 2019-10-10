@@ -1,5 +1,29 @@
 // CLICK EVENTS
 
+$('.prepare-csv').click(function(){
+	let output = 'QB,RB,RB,WR,WR,WR,FLEX,S-FLEX\n'
+
+	_.forEach(lineups, function(lineup){
+
+		for(var key in lineup.roster){
+			
+			let position = lineup.roster[key]
+
+			_.forEach(position, function(slot){
+				output += slot.ID + ','
+			})
+
+		}
+
+		output = output.substring(0, output.length - 1)
+		output += '\n'
+
+	})
+
+	$('#csv-data').val(output)
+
+	document.getElementById('create-csv').submit();
+})
 
 // Sort players based on game or position
 $('.sort-players li').click(function(){
@@ -81,6 +105,8 @@ $(".players").delegate(".player-select-add-highlighted", "click", function(){
 	$('.player-select-bar').remove()
 	$('.clicked-player').after(selectBar)
 	if(clickedLineupRows.length < 1) createSlider(clickedPlayerLineups.length)
+
+	
 
 })
 
