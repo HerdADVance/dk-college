@@ -229,6 +229,7 @@ td.gameinfo{
 .lineup{
   float: left;
   margin: 0 0.33% 20px 0.33%;
+  user-select: none;
   width: 24%;
 }
 .lineup th{
@@ -251,11 +252,15 @@ td.gameinfo{
   background: pink;
 }
 
+
 .lineup td{
   color: #000;
   font-size: 10px;
   height: 23px;
   padding: 0;
+}
+.lineup td.swap:hover{
+  background: gold;
 }
 
 /* INDIVIDUAL LINEUP PLAYER ROWS */

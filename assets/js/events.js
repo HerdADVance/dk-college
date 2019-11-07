@@ -117,23 +117,45 @@ $(".players").delegate(".player-select-add-highlighted", "click", function(){
 
 
 // Clicking lineup rows
-$(".lineups").delegate("tr", "click", function(){
+$(".lineups").delegate("td", "click", function(){
 	
-	var lineupId = parseInt($(this).parent().parent().attr('id'))
-	var playerId = $(this).attr('data-pid')
+	var lineupId = parseInt($(this).parent().parent().parent().attr('id'))
+	var playerId = $(this).parent().attr('data-pid')
 	
-	var position = $(this).attr('data-pos')
-	var slot = $(this).attr('data-slot')
+	var position = $(this).parent().attr('data-pos')
+	var slot = $(this).parent().attr('data-slot')
 
 
-	if(playerId){ // This row has a player so remove him from lineup and update his selected lineups
+	if(playerId){ // This row has a player so remove him from lineup and update his selected lineups OR make swap available
 		
-		removePlayerFromOneLineup(playerId, lineupId, position, slot)
-		// prevent this from taking away highlighted rows
+		let swapObject = {
+			lineup: lineupId,
+			player: findPlayerById(playerId),
+			position: position,
+			slot: slot
+		}		
 
-	} else{ // Highlight row background and add next clicked player to row
+		console.log(swapObject);
 
-		var wasSelected = $(this).hasClass('player-selectable')
+		if($(this).hasClass('swap')){
+
+			if(clickedSwapRow.length < 1){ // Swapped row is empty so add in info for spot clicked
+				clickedSwapRow.push(swapObject);
+			} 
+			else{ // Swap with previously selected
+				swapPlayerWithPlayer(clickedSwapRow[0], swapObject);
+				printLineups(lineups);
+				clickedSwapRow = [];
+			}
+
+		} else{
+			removePlayerFromOneLineup(playerId, lineupId, position, slot)
+		} 
+		
+
+	} else{ // No player in row so highlight row background and add next clicked player to row
+
+		var wasSelected = $(this).parent().hasClass('player-selectable')
 
 		if(wasSelected){ // Row was already selected so remove from the global array
 			
@@ -141,7 +163,7 @@ $(".lineups").delegate("tr", "click", function(){
 			    return row.lineup != lineupId
 			});
 
-			$(this).removeClass('player-selectable')
+			$(this).parent().removeClass('player-selectable')
 
 		} else { // Row wasn't selected so add to the global array (and remove other row in same lineup)
 			
@@ -157,8 +179,8 @@ $(".lineups").delegate("tr", "click", function(){
 				slot: slot
 			})
 
-			$(this).siblings().removeClass('player-selectable')
-			$(this).addClass('player-selectable')
+			$(this).parent().siblings().removeClass('player-selectable')
+			$(this).parent().addClass('player-selectable')
 	
 		}
 	

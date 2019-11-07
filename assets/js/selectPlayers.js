@@ -34,6 +34,7 @@ function buildPlayerSelectBar(player, numLineups){
 }
 
 function findPlayerById(id){
+	id = parseInt(id);
 	let player = _.find(allPlayers, {'ID': id })
 	return player
 }

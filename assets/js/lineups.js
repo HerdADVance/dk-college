@@ -50,7 +50,7 @@ function printLineups(arr){
 							slotsFilled ++
 							output += '<td>' + slot.Name + '</td>'
 							output += '<td>' + slot.Salary + '</td>'
-							output += '<td>SWAP</td>'
+							output += '<td class="swap">SWAP</td>'
 						} else output += '<td></td><td></td><td></td>'
 					output += '</tr>'
 
@@ -125,7 +125,7 @@ function printOneLineup(lineup){
 						slotsFilled ++
 						output += '<td>' + slot.Name + '</td>'
 						output += '<td>' + slot.Salary + '</td>'
-						output += '<td>SWAP</td>'
+						output += '<td class="swap">SWAP</td>'
 					} else output += '<td></td><td></td><td></td>'
 				output += '</tr>'
 
@@ -217,6 +217,18 @@ function sortLineupsBySalary(direction){
 	if(direction == 'high') sortDirection = 'desc';
 
 	lineups = _.orderBy(lineups, ['avg'], [sortDirection]);
+
+}
+
+function swapPlayerWithPlayer(a,b){
+
+	console.log("swappy");
+
+	let foundLineupA = lineups.findIndex(x => x.id == a.lineup);
+	lineups[foundLineupA].roster[a.position][a.slot] = b.player;
+
+	let foundLineupB = lineups.findIndex(x => x.id == b.lineup);
+	lineups[foundLineupB].roster[b.position][b.slot] = a.player;
 
 }
 

@@ -15,10 +15,13 @@ clickedPlayer = null
 clickedPlayerLineups = []
 
 clickedLineupRows = []
-
 eligibleHighlightedRows = []
 
+clickedSwapRow = []
+
 slider = null
+
+
 
 // INITIALIZE
 printSortedPlayers(allPlayers)
