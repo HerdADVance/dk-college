@@ -1,6 +1,6 @@
-function searchLineups(pos, num){
+function searchLineups(pos, num, skip){
 
-	addPlayer(pos, num)
+	addPlayer(pos, num, skip)
 
 }
 
@@ -8,12 +8,15 @@ function searchLineupsToRemove(pos, num){
 	removeRegular(pos, num)
 }
 
-function addPlayer(pos, numLineups){
+function addPlayer(pos, numLineups, numSkip){
 
 	var addedTo = [] // Lineup Id's that fit our criteria. We'll use this at the end of this function
 
+	let i = 0
+	if(numSkip) i = numSkip - 1
+
 	// Looping through global lineups
-	for(var i=0; i < lineups.length; i++){
+	for(i; i < lineups.length; i++){
 
 		let alreadyInLineup = isClickedPlayerInLineup(lineups[i].id)
 		if(alreadyInLineup) continue

@@ -73,16 +73,21 @@ $(".players").delegate(".player-select-add", "click", function(){
 
 	let random = $('#random').val()
 	let numberToChange = parseInt(($('.player-select-delta').text()))
+	let startFrom = parseInt($('#start-from').val());
 
 	// Shuffle the lineups if random is selected
 	if(random == 'yes') lineups = _.shuffle(lineups);
 
+	// Start from this lineup if selected
+	let numberToSkip = undefined
+	if(startFrom) numberToSkip = startFrom 
+
 	// The main functions reponsible for adding or removing players
 	if(numberToChange < 0) searchLineupsToRemove(clickedPlayer.Position, numberToChange)
-	else searchLineups(clickedPlayer.Position, numberToChange)
+	else searchLineups(clickedPlayer.Position, numberToChange, numberToSkip)
 
-	// Reorder the lineups by their original ID's before printing
-	lineups = _.orderBy(lineups, ['id'],['asc'])
+	// Reorder the lineups by their original ID's before printing. Otherwise keep sorted by salary/whatever
+	if(random == 'yes') lineups = _.orderBy(lineups, ['id'],['asc'])
 
 	printLineups(lineups)
 
@@ -166,4 +171,25 @@ $(".lineups").delegate("tr", "click", function(){
 	if(clickedLineupRows.length < 1) createSlider(clickedPlayerLineups.length)
 })
 
+
+$('.show-over-cap').click(function(){
+	$('.lineup').hide();
+	$('.lineup').each(function(){
+		if ($(this).children('tbody').children('.salary-status').hasClass('neg')) $(this).show();
+	});
+});
+
+$('.show-all').click(function(){
+	$('.lineup').show();
+});
+
+$('.sort-high').click(function(){
+	sortLineupsBySalary('high');
+	printLineups(lineups);
+});
+
+$('.sort-low').click(function(){
+	sortLineupsBySalary('low');
+	printLineups(lineups);
+});
 

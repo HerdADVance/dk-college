@@ -62,13 +62,18 @@ button{
 /* TOP LEVEL DIVS */
 .list{
   float: left;
-  width: 33%;
+  height: 98%;
+  left: 0;
+  max-height: 98%;
+  overflow: auto;
+  position: fixed;
+  width: 25%;
 }
 .lineups{
   background:;
   color: #FFF;
   float: right;
-  width: 66%;
+  width: 75%;
 }
 
 
@@ -255,15 +260,11 @@ td.gameinfo{
 
 /* INDIVIDUAL LINEUP PLAYER ROWS */
 .lineup tr td:first-child{
-  width: 30px;
-}
-.lineup tr td:nth-child(3){
-  font-size: 12px;
-  width: 50px;
+  width: 25px;
 }
 .lineup tr td:last-child{
-  cursor: pointer;
-  width: 25px;
+  font-size: 12px;
+  width: 40px;
 }
 
 /* LINEUP TOTALS ROW */

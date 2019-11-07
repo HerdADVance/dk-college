@@ -24,7 +24,7 @@ function buildPlayerSelectBar(player, numLineups){
 			} else{
 				output += '<button class="player-select-add">Add to <span class="player-select-delta"></span> lineups</button><br/>'
 				output += 'Random: <select id="random"><option value="no">No</option><option value="yes">Yes</option></select>'
-
+				output += 'Start From: <input id="start-from"></input>';
 			}
 			
 		output += '</td>'

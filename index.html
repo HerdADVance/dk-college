@@ -10,14 +10,22 @@
 </head>
 
 <body>
-	<button class="prepare-csv">Create Import File</button>
-	<form style="display: none;" id="create-csv" name="create-csv" action="create-csv.php" method="post"> 
-		<input type="hidden" id="csv-data" name="csv-data">
-	</form>
+
 
 	<div class="wrapper">
 
 		<div class="list">
+			
+			<button class="prepare-csv">Create Import File</button>
+			<form style="display: none;" id="create-csv" name="create-csv" action="create-csv.php" method="post"> 
+				<input type="hidden" id="csv-data" name="csv-data">
+			</form>
+
+			<button class="show-over-cap">Show Over Cap</button>
+			<button class="show-all">Show All</button><br/>
+
+			<button class="sort-high">Highest Avg Salary Remaining</button>
+			<button class="sort-low">Lowest Avg Salary Remaining</button>
 			
 			<div>
 				<ul class="sort-players sort-positions clickable">

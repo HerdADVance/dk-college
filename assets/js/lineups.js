@@ -30,9 +30,10 @@ function printLineups(arr){
 	_.forEach(arr, function(lineup){
 
 		output += '<table class="lineup" id="' + lineup.id + '">'
-			output +='<tr><th colspan="4"> Lineup #' + count + '</th></tr>'
+			output +='<tr><th colspan="4"> Lineup #' + lineup.id + '</th></tr>'
 			
 			var salary = 0
+			var slotsFilled = 0
 
 			for(var key in lineup.roster){
 				
@@ -46,10 +47,11 @@ function printLineups(arr){
 						output += '<td>' + key + '</td>'
 						if(slot.Name){
 							salary += slot.Salary
+							slotsFilled ++
 							output += '<td>' + slot.Name + '</td>'
-							output += '<td>' + slot.Salary
-							output += '<td>' + '-' + '</td>'  
-						} else output += '<td></td><td></td><td>+</td>'
+							output += '<td>' + slot.Salary + '</td>'
+							output += '<td><button>SWAP</button></td>'
+						} else output += '<td></td><td></td><td></td>'
 					output += '</tr>'
 
 					slotCount ++
@@ -57,7 +59,11 @@ function printLineups(arr){
 				})
 			}
 
-		output += '<tr><td colspan="2">Rem: ' + (50000 - salary) + '</td><td colspan="2">' + salary + '</td></tr>'
+		let salaryStatus = '';
+		if(salary > 50000) salaryStatus = 'neg';
+		if(salary <= 50000 && slotsFilled == 8) salaryStatus = 'pos';
+
+		output += '<tr class="salary-status ' + salaryStatus + '"><td colspan="2">Rem: ' + (50000 - salary) + '</td><td colspan="2">' + salary + '</td></tr>'
 		output += '</table>'
 
 		count ++
@@ -84,6 +90,7 @@ function printOneLineup(lineup){
 		output +='<tr><th colspan="4"> Lineup #' + lineup.id + '</th></tr>'
 		
 		var salary = 0
+		var slotsFilled = 0
 
 		for(var key in lineup.roster){
 			
@@ -115,10 +122,11 @@ function printOneLineup(lineup){
 					output += '<td>' + key + '</td>'
 					if(slot.Name){
 						salary += slot.Salary
+						slotsFilled ++
 						output += '<td>' + slot.Name + '</td>'
-						output += '<td>' + slot.Salary
-						output += '<td>' + '-' + '</td>'  
-					} else output += '<td></td><td></td><td>+</td>'
+						output += '<td>' + slot.Salary + '</td>'
+						output += '<td><button>SWAP</button></td>'
+					} else output += '<td></td><td></td><td></td>'
 				output += '</tr>'
 
 				slotCount ++
@@ -126,7 +134,11 @@ function printOneLineup(lineup){
 			})
 		}
 
-	output += '<tr><td colspan="2">Rem: ' + (50000 - salary) + '</td><td colspan="2">' + salary + '</td></tr>'
+	let salaryStatus = '';
+	if(salary > 50000) salaryStatus = 'neg';
+	if(salary <= 50000 && slotsFilled == 8) salaryStatus = 'pos';
+
+	output += '<tr class="salary-status ' + salaryStatus + '"><td colspan="2">Rem: ' + (50000 - salary) + '</td><td colspan="2">' + salary + '</td></tr>'
 	output += '</table>'
 
 	$('table#' + lineup.id).html(output)
@@ -173,4 +185,37 @@ function removePlayerFromOneLineup(playerId, lineupId, position, slot){
 
 	
 }
+
+
+function sortLineupsBySalary(direction){
+	_.forEach(lineups, function(lineup){
+
+		let salary = 0
+		let filled = 0
+
+		for(var key in lineup.roster){
+			let position = lineup.roster[key]
+			_.forEach(position, function(slot){
+				if(slot.Name){
+				
+					salary += parseInt(slot.Salary)
+					filled ++
+				
+				}
+			})
+		}
+
+		let avg = (50000 - salary) / (8 - filled);
+		lineup.avg = avg;
+
+	})
+
+	let sortDirection = 'asc';
+	if(direction == 'high') sortDirection = 'desc';
+
+	lineups = _.orderBy(lineups, ['avg'], [sortDirection]);
+
+}
+
+
 
