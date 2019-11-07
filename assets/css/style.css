@@ -248,6 +248,9 @@ td.gameinfo{
 .lineup tr.player-selectable{
   background: skyblue;
 }
+.lineup tr.player-swappable{
+  background: gold;
+}
 .lineup tr.has-player:hover{
   background: pink;
 }

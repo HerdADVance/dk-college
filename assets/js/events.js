@@ -140,6 +140,7 @@ $(".lineups").delegate("td", "click", function(){
 		if($(this).hasClass('swap')){
 
 			if(clickedSwapRow.length < 1){ // Swapped row is empty so add in info for spot clicked
+				$(this).parent().addClass('player-swappable');
 				clickedSwapRow.push(swapObject);
 			} 
 			else{ // Swap with previously selected
