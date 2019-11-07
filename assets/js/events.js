@@ -193,3 +193,7 @@ $('.sort-low').click(function(){
 	printLineups(lineups);
 });
 
+$('.sort-id').click(function(){
+	sortLineupsById();
+	printLineups(lineups);
+});

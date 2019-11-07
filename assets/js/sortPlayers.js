@@ -28,7 +28,7 @@ function printSelectedPlayers(game){
 			output += '<td class="position">' + foundPlayer.Position + '</td>'
 			output += '<td class="name">' + foundPlayer.Name + '</td>'
 			output += '<td class="team">' + foundPlayer.TeamAbbrev + '</td>'
-			output += '<td class="pct-lineups">' + player.lineupsIn.length + '/' + numberOfLineups + '</td>'
+			output += '<td class="pct-lineups">' + player.lineupsIn.length  + '</td>'
 			output += '<td class="pct-lineups">' + (player.lineupsIn.length/numberOfLineups*100).toFixed(1) + '%' + '</td>'
 		output += '</tr>'
 	}

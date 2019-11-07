@@ -50,7 +50,7 @@ function printLineups(arr){
 							slotsFilled ++
 							output += '<td>' + slot.Name + '</td>'
 							output += '<td>' + slot.Salary + '</td>'
-							output += '<td><button>SWAP</button></td>'
+							output += '<td>SWAP</td>'
 						} else output += '<td></td><td></td><td></td>'
 					output += '</tr>'
 
@@ -125,7 +125,7 @@ function printOneLineup(lineup){
 						slotsFilled ++
 						output += '<td>' + slot.Name + '</td>'
 						output += '<td>' + slot.Salary + '</td>'
-						output += '<td><button>SWAP</button></td>'
+						output += '<td>SWAP</td>'
 					} else output += '<td></td><td></td><td></td>'
 				output += '</tr>'
 
@@ -186,6 +186,9 @@ function removePlayerFromOneLineup(playerId, lineupId, position, slot){
 	
 }
 
+function sortLineupsById(){
+	lineups = _.orderBy(lineups, ['id'], ['asc']);
+}
 
 function sortLineupsBySalary(direction){
 	_.forEach(lineups, function(lineup){
