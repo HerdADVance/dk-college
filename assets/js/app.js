@@ -8,7 +8,7 @@ selectedPosition = 'ALL'
 selectedGame = 'ALL'
 
 newLineupId = 0
-numberOfLineups = 20
+numberOfLineups = 8
 lineups = []
 
 clickedPlayer = null
